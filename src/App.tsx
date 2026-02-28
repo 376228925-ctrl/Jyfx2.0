@@ -316,26 +316,52 @@ function SolutionSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-3">
-            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-4 group hover:border-blue-200 transition-all">
+            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
               <Database size={20} />
             </div>
-            <h4 className="font-bold">语义注入</h4>
-            <p className="text-xs text-slate-500 leading-relaxed">让数据人员从“写代码”转向“写注释”，将脑子里的业务逻辑沉淀为机器可读的知识。</p>
+            <div className="space-y-2">
+              <h4 className="font-bold">语义注入</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">让数据人员从“写代码”转向“写注释”，将脑子里的业务逻辑沉淀为机器可读的知识。</p>
+            </div>
+            <div className="p-3 bg-slate-50 rounded-xl border-l-2 border-blue-500 space-y-1">
+              <div className="text-[10px] font-bold text-blue-600 uppercase">案例举措：</div>
+              <p className="text-[10px] text-slate-600 leading-relaxed">
+                建立“业务逻辑元数据标准”。在 BDP 字段描述中注入：“该字段受[油价]和[线路]共同影响，核算时需剔除内部结算”。
+              </p>
+            </div>
           </div>
-          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-3">
-            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+
+          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-4 group hover:border-blue-200 transition-all">
+            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
               <Search size={20} />
             </div>
-            <h4 className="font-bold">全量扫描</h4>
-            <p className="text-xs text-slate-500 leading-relaxed">AI 基于语义理解，自动遍历相关表的所有维度，寻找对指标影响最大的“关键因子”。</p>
+            <div className="space-y-2">
+              <h4 className="font-bold">全量扫描</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">AI 基于语义理解，自动遍历相关表的所有维度，寻找对指标影响最大的“关键因子”。</p>
+            </div>
+            <div className="p-3 bg-slate-50 rounded-xl border-l-2 border-blue-500 space-y-1">
+              <div className="text-[10px] font-bold text-blue-600 uppercase">案例举措：</div>
+              <p className="text-[10px] text-slate-600 leading-relaxed">
+                启用“AI 自动关联算法”。AI 自动遍历 400+ 维度，通过相关性分析发现 [客户行业] 与 [退货率] 的隐性关联，而非只看 [区域]。
+              </p>
+            </div>
           </div>
-          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-3">
-            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+
+          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-4 group hover:border-blue-200 transition-all">
+            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
               <FileText size={20} />
             </div>
-            <h4 className="font-bold">结论提炼</h4>
-            <p className="text-xs text-slate-500 leading-relaxed">不再扔给业务一堆表，而是直接输出一段带逻辑、带证据、带建议的自然语言结论。</p>
+            <div className="space-y-2">
+              <h4 className="font-bold">结论提炼</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">不再扔给业务一堆表，而是直接输出一段带逻辑、带证据、带建议的自然语言结论。</p>
+            </div>
+            <div className="p-3 bg-slate-50 rounded-xl border-l-2 border-blue-500 space-y-1">
+              <div className="text-[10px] font-bold text-blue-600 uppercase">案例举措：</div>
+              <p className="text-[10px] text-slate-600 leading-relaxed">
+                上线“经营解释生成器”。将复杂的 SQL 结果转化为：“由于 A 行业客户结算周期延长，导致本月账面收入下降 15%，建议调整核算基准”。
+              </p>
+            </div>
           </div>
         </div>
       </div>
