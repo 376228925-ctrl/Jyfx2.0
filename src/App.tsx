@@ -37,10 +37,10 @@ import {
 const SECTIONS = [
   { id: 'problem', title: '01 痛点：科技要破局' },
   { id: 'logic', title: '02 逻辑：认知带宽 vs 维度全集' },
-  { id: 'solution', title: '03 方案：BDP 的“精装修”工程' },
+  { id: 'solution', title: '03 方案：数据人员的价值跃迁' },
   { id: 'case', title: '04 案例：从“描述数据”到“解释经营”' },
   { id: 'simulator', title: '05 仿真：人工 vs AI 分析模拟器' },
-  { id: 'action', title: '06 行动：知识工程路线图' }
+  { id: 'opportunity', title: '06 机会：我们的破局点' }
 ];
 
 export default function App() {
@@ -103,7 +103,7 @@ export default function App() {
             {activeSection === 'solution' && <SolutionSection />}
             {activeSection === 'case' && <CaseSection />}
             {activeSection === 'simulator' && <SimulatorSection />}
-            {activeSection === 'action' && <ActionSection />}
+            {activeSection === 'opportunity' && <OpportunitySection />}
           </motion.div>
         </AnimatePresence>
       </main>
@@ -267,102 +267,176 @@ function LogicSection() {
 }
 
 function SolutionSection() {
+  const [activeStep, setActiveStep] = useState(1);
+
   return (
     <div className="space-y-12">
       <div className="space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold uppercase tracking-wider">
           <Settings size={14} />
-          The Solution
+          Value Transition
         </div>
         <h2 className="text-4xl font-bold text-slate-900">
           解决方案：<br />
-          <span className="text-blue-600">BDP 库表的“精装修”工程</span>
+          <span className="text-blue-600">数据人员的价值跃迁</span>
         </h2>
       </div>
 
-      <div className="space-y-8">
-        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="p-8 border-b md:border-b-0 md:border-r border-slate-100 space-y-4">
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">改造前：原始表结构 (Raw Schema)</div>
-              <div className="font-mono text-[11px] bg-slate-50 p-4 rounded-xl border border-slate-100 text-slate-500">
-                TABLE: t_income_detail <br />
-                FIELDS: <br />
-                - order_id (varchar) <br />
-                - region_id (int) <br />
-                - amount (decimal) <br />
-                - cust_type (int) <br />
-                - create_time (datetime)
-              </div>
-              <div className="flex items-center gap-2 text-red-500 text-xs font-bold">
-                <XCircle size={14} /> AI 只能写 SQL，无法理解业务逻辑
-              </div>
-            </div>
-            <div className="p-8 bg-blue-50/30 space-y-4">
-              <div className="text-xs font-bold text-blue-600 uppercase tracking-widest">改造后：语义增强 (Semantic Enhanced)</div>
-              <div className="font-mono text-[11px] bg-white p-4 rounded-xl border border-blue-100 text-blue-800 shadow-sm">
-                TABLE: 收入明细表 <br />
-                DESCRIPTION: 记录物流全链路收入，包含基础运费与增值费。 <br />
-                FIELDS: <br />
-                - region_id: 业务大区。注意：华东区包含上海和江苏。 <br />
-                - amount: 结算金额。已扣除内部结算，代表真实外部收入。 <br />
-                - cust_type: 客户分层。1-KA客户(高粘性)，2-散客(高毛利)。
-              </div>
-              <div className="flex items-center gap-2 text-emerald-600 text-xs font-bold">
-                <CheckCircle size={14} /> AI 具备了“业务专家”的思考背景
-              </div>
-            </div>
-          </div>
+      {/* Interactive Pipeline Simulator */}
+      <div className="bg-white rounded-[32px] border border-slate-200 shadow-xl overflow-hidden">
+        {/* Steps Header */}
+        <div className="flex border-b border-slate-100 bg-slate-50/50">
+          {[
+            { id: 1, title: '1. 语义注入 (灌入知识)', icon: Database },
+            { id: 2, title: '2. 全量扫描 (AI 计算)', icon: Search },
+            { id: 3, title: '3. 结论提炼 (实现效果)', icon: FileText }
+          ].map(step => (
+            <button
+              key={step.id}
+              onClick={() => setActiveStep(step.id)}
+              className={`flex-1 py-5 font-bold text-sm transition-all flex items-center justify-center gap-2 ${
+                activeStep === step.id 
+                  ? 'bg-white text-blue-600 border-b-2 border-blue-600 shadow-sm' 
+                  : 'text-slate-400 hover:text-slate-600'
+              }`}
+            >
+              <step.icon size={18} />
+              {step.title}
+            </button>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-4 group hover:border-blue-200 transition-all">
-            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Database size={20} />
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-bold">语义注入</h4>
-              <p className="text-xs text-slate-500 leading-relaxed">让数据人员从“写代码”转向“写注释”，将脑子里的业务逻辑沉淀为机器可读的知识。</p>
-            </div>
-            <div className="p-3 bg-slate-50 rounded-xl border-l-2 border-blue-500 space-y-1">
-              <div className="text-[10px] font-bold text-blue-600 uppercase">案例举措：</div>
-              <p className="text-[10px] text-slate-600 leading-relaxed">
-                建立“业务逻辑元数据标准”。在 BDP 字段描述中注入：“该字段受[油价]和[线路]共同影响，核算时需剔除内部结算”。
-              </p>
-            </div>
-          </div>
+        {/* Step Content */}
+        <div className="p-8 md:p-12 min-h-[420px]">
+          <AnimatePresence mode="wait">
+            {activeStep === 1 && (
+              <motion.div key="step1" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold">我们向 AI 灌入什么？<span className="text-slate-400 font-normal text-base ml-2">从“写代码”到“写业务逻辑”</span></h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2"><XCircle size={14}/> 过去：只建物理表 (Raw Schema)</div>
+                    <div className="p-6 bg-slate-900 rounded-2xl font-mono text-xs text-slate-300 space-y-2 shadow-inner h-full">
+                      <div className="text-blue-400">CREATE TABLE t_income (</div>
+                      <div className="pl-4">order_id VARCHAR(32),</div>
+                      <div className="pl-4">region_id INT,</div>
+                      <div className="pl-4">amount DECIMAL(10,2),</div>
+                      <div className="pl-4">cust_type INT</div>
+                      <div className="text-blue-400">);</div>
+                      <div className="mt-6 pt-4 border-t border-slate-700 text-slate-500 italic">
+                        -- 机器只知道字段类型 (INT, VARCHAR)<br/>
+                        -- 完全不懂背后的业务含义
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="text-xs font-bold text-blue-600 uppercase tracking-widest flex items-center gap-2"><CheckCircle size={14}/> 现在：注入业务语义 (Semantic Layer)</div>
+                    <div className="p-6 bg-blue-50 rounded-2xl font-mono text-xs text-blue-800 space-y-2 border border-blue-200 shadow-sm h-full">
+                      <div className="font-bold text-blue-600">字段：amount (结算金额)</div>
+                      <div className="pl-4">业务口径：已扣除内部结算，代表真实外部收入。</div>
+                      <div className="pl-4">适用场景：毛利核算、外部财报。</div>
+                      <div className="pl-4">前置关联因子：[油价波动], [装卸费率]</div>
+                      <div className="mt-4 font-bold text-blue-600">字段：cust_type (客户分层)</div>
+                      <div className="pl-4">业务逻辑：1-KA客户(高粘性/低毛利)，2-散客(低粘性/高毛利)</div>
+                      <div className="mt-6 pt-4 border-t border-blue-200 text-emerald-600 font-bold flex items-center gap-1">
+                        <Zap size={14}/> AI 获得了业务专家的思考背景
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
 
-          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-4 group hover:border-blue-200 transition-all">
-            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Search size={20} />
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-bold">全量扫描</h4>
-              <p className="text-xs text-slate-500 leading-relaxed">AI 基于语义理解，自动遍历相关表的所有维度，寻找对指标影响最大的“关键因子”。</p>
-            </div>
-            <div className="p-3 bg-slate-50 rounded-xl border-l-2 border-blue-500 space-y-1">
-              <div className="text-[10px] font-bold text-blue-600 uppercase">案例举措：</div>
-              <p className="text-[10px] text-slate-600 leading-relaxed">
-                启用“AI 自动关联算法”。AI 自动遍历 400+ 维度，通过相关性分析发现 [客户行业] 与 [退货率] 的隐性关联，而非只看 [区域]。
-              </p>
-            </div>
-          </div>
+            {activeStep === 2 && (
+              <motion.div key="step2" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold">AI 如何处理这些知识？<span className="text-slate-400 font-normal text-base ml-2">基于语义的自动全量扫描</span></h3>
+                </div>
+                <div className="relative p-8 bg-slate-900 rounded-3xl overflow-hidden flex items-center justify-center min-h-[280px]">
+                  {/* Radar/Scan animation background */}
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-blue-500 rounded-full animate-[ping_3s_linear_infinite]" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border border-blue-400 rounded-full animate-[ping_2s_linear_infinite]" />
+                  </div>
+                  
+                  <div className="relative z-10 grid grid-cols-3 gap-6 w-full max-w-3xl">
+                    <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-center space-y-3">
+                      <Database className="mx-auto text-blue-400" size={32} />
+                      <div className="text-sm text-white font-bold">语义知识库</div>
+                      <div className="text-xs text-blue-200">业务口径 / 关联因子</div>
+                    </div>
+                    <div className="flex items-center justify-center">
+                      <div className="flex space-x-2">
+                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                      </div>
+                    </div>
+                    <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-center space-y-3">
+                      <Search className="mx-auto text-emerald-400" size={32} />
+                      <div className="text-sm text-white font-bold">400+ 维度全量扫描</div>
+                      <div className="text-xs text-emerald-200">寻找隐性强相关因子</div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-600 text-center max-w-2xl mx-auto leading-relaxed">
+                  AI 不再像人一样只查“区域”和“产品”，而是自动将“结算金额”与“油价”、“客户分层”、“天气”等数百个维度进行交叉验证，找出真正影响指标的根因。
+                </p>
+              </motion.div>
+            )}
 
-          <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-4 group hover:border-blue-200 transition-all">
-            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <FileText size={20} />
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-bold">结论提炼</h4>
-              <p className="text-xs text-slate-500 leading-relaxed">不再扔给业务一堆表，而是直接输出一段带逻辑、带证据、带建议的自然语言结论。</p>
-            </div>
-            <div className="p-3 bg-slate-50 rounded-xl border-l-2 border-blue-500 space-y-1">
-              <div className="text-[10px] font-bold text-blue-600 uppercase">案例举措：</div>
-              <p className="text-[10px] text-slate-600 leading-relaxed">
-                上线“经营解释生成器”。将复杂的 SQL 结果转化为：“由于 A 行业客户结算周期延长，导致本月账面收入下降 15%，建议调整核算基准”。
-              </p>
-            </div>
+            {activeStep === 3 && (
+              <motion.div key="step3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold">最终实现什么效果？<span className="text-slate-400 font-normal text-base ml-2">直接输出业务决策建议</span></h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2"><XCircle size={14}/> 过去：扔给业务一堆表</div>
+                    <div className="p-8 bg-slate-50 rounded-2xl border border-slate-200 h-56 flex flex-col justify-center items-center text-center space-y-4">
+                      <LayoutDashboard className="text-slate-300" size={40} />
+                      <div className="text-sm text-slate-500 leading-relaxed">
+                        “你要的华东区明细表跑出来了，<br/>一共 50 万行，你自己透视一下看看原因。”
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="text-xs font-bold text-emerald-600 uppercase tracking-widest flex items-center gap-2"><CheckCircle size={14}/> 现在：直接输出经营诊断</div>
+                    <div className="p-8 bg-emerald-50 rounded-2xl border border-emerald-200 h-56 flex flex-col justify-center space-y-4 shadow-sm relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full -mr-10 -mt-10 blur-xl" />
+                      <div className="text-sm text-emerald-800 font-medium leading-relaxed relative z-10">
+                        “诊断结论：本月华东区收入下降 15%，并非销售不力。核心原因是 <strong>A 行业 KA 客户结算周期延长</strong>（非经营性），以及 <strong>油价上涨导致的毛利侵蚀</strong>。
+                        <br/><br/>
+                        💡 <strong>建议动作：</strong>调整本月核算基准，并启动燃油附加费动态更新机制。”
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        
+        {/* Navigation Footer */}
+        <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
+          <button 
+            onClick={() => setActiveStep(prev => Math.max(1, prev - 1))}
+            className={`text-sm font-bold px-4 py-2 rounded-lg transition-all ${activeStep === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-200'}`}
+          >
+            上一步
+          </button>
+          <div className="flex gap-2">
+            {[1, 2, 3].map(step => (
+              <div key={step} className={`w-2 h-2 rounded-full transition-all ${activeStep === step ? 'bg-blue-600 w-6' : 'bg-slate-300'}`} />
+            ))}
           </div>
+          <button 
+            onClick={() => setActiveStep(prev => Math.min(3, prev + 1))}
+            className={`text-sm font-bold px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${activeStep === 3 ? 'text-slate-300 cursor-not-allowed' : 'text-blue-600 hover:bg-blue-100'}`}
+          >
+            下一步 <ArrowRight size={16} />
+          </button>
         </div>
       </div>
     </div>
@@ -766,94 +840,147 @@ function SimulatorSection() {
   );
 }
 
-function ActionSection() {
+function OpportunitySection() {
   return (
     <div className="space-y-12">
       <div className="space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider">
           <Target size={14} />
-          The Roadmap
+          Our Opportunities
         </div>
         <h2 className="text-4xl font-bold text-slate-900">
-          行动计划：<br />
-          <span className="text-blue-600">启动“知识工程”专项</span>
+          我们的机会点：<br />
+          <span className="text-blue-600">重塑科技与业务的生产关系</span>
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="p-8 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-6 relative group hover:border-blue-200 transition-all">
-          <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">1</div>
-          <h3 className="font-bold text-xl">语义沉淀</h3>
-          <div className="space-y-4">
-            <p className="text-sm text-slate-500 leading-relaxed">
-              推动数据人员对 BDP 核心表进行“精装修”。不仅是定义，更是<strong>业务逻辑含义</strong>和<strong>应用场景</strong>。
-            </p>
-            <div className="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500 text-xs">
-              <div className="font-bold text-blue-800 mb-2 flex items-center gap-1">
-                <CheckCircle size={14} /> 案例举措：建立《业务语义字典》
+      <div className="space-y-8">
+        {/* Point 1 & 3 in a grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Point 1 */}
+          <div className="p-8 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-6 hover:border-indigo-200 transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center">
+                <Brain size={24} />
               </div>
-              <p className="text-slate-600 leading-relaxed">
-                由业务专家与数据人员共同定义字段的经营逻辑。例如：“单票成本”不仅是财务支出，更要关联“装载率”和“线路时效”等前置因子，确保 AI 知道成本上升背后的物理原因。
-              </p>
+              <h3 className="text-xl font-bold">1. 知识工程：沉淀全员 Skills 库</h3>
+            </div>
+            <p className="text-sm text-slate-500 leading-relaxed">
+              “知识工程”专项不能仅停留在数据层面。我们需要将<strong>数据、前端、后端、产品</strong>全链路的隐性经验显性化。
+            </p>
+            <div className="p-4 bg-slate-50 rounded-xl text-xs text-slate-600 border-l-4 border-indigo-400">
+              把现在员工脑子里的“业务直觉”和“技术套路”，按照统一规范沉淀成 AI 可调用的 <strong>Skills 技能库</strong>，让个人能力转化为组织的数字资产。
             </div>
           </div>
-          <div className="pt-4 border-t border-slate-50 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-            重点：让机器读懂业务
+
+          {/* Point 3 */}
+          <div className="p-8 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-6 hover:border-amber-200 transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center">
+                <Zap size={24} />
+              </div>
+              <h3 className="text-xl font-bold">3. 全员创造：建立创造力工坊</h3>
+            </div>
+            <p className="text-sm text-slate-500 leading-relaxed">
+              全员创造，不仅于此刻，此人。凡是结合业务痛点与新技术（如大模型）有爆破点的想法，全员皆可参与。
+            </p>
+            <div className="p-4 bg-slate-50 rounded-xl text-xs text-slate-600 border-l-4 border-amber-400">
+              <strong>机制：</strong>资源灵活配置，人人可以冲锋。鼓励创新试错，但强调<strong>短周期、高频次</strong>的实质性价值交付。
+            </div>
           </div>
         </div>
 
-        <div className="p-8 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-6 relative group hover:border-blue-200 transition-all">
-          <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">2</div>
-          <h3 className="font-bold text-xl">模型对齐</h3>
-          <div className="space-y-4">
-            <p className="text-sm text-slate-500 leading-relaxed">
-              将沉淀的语义知识库喂给大模型，建立“表-业务-场景”的联想能力。
+        {/* Point 2: 听见炮火声 */}
+        <div className="p-8 md:p-12 bg-slate-900 rounded-[40px] text-white space-y-10 relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full -mr-20 -mt-20 blur-3xl pointer-events-none" />
+          
+          <div className="relative z-10 space-y-4">
+            <h3 className="text-3xl font-bold flex items-center gap-3">
+              <Target className="text-blue-400" size={32} />
+              2. 让数据听见炮火声：深耕一线阵地
+            </h3>
+            <p className="text-slate-400 max-w-2xl leading-relaxed">
+              走出总部的“象牙塔”，把数据武器直接交到一线听得见炮火的指挥员手里，用业绩证明价值。
             </p>
-            <div className="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500 text-xs">
-              <div className="font-bold text-blue-800 mb-2 flex items-center gap-1">
-                <CheckCircle size={14} /> 案例举措：构建《经营因果图谱》
-              </div>
-              <p className="text-slate-600 leading-relaxed">
-                通过 RAG 技术将业务 SOP 和历史分析报告喂给模型。例如：让 AI 学习到“时效下降”通常与“分拣中心拥堵”或“中转环节增加”正相关，从而在分析时能自动进行逻辑联想。
+          </div>
+
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 bg-white/5 rounded-2xl border border-white/10 space-y-3 hover:bg-white/10 transition-all">
+              <div className="text-blue-400 font-bold text-lg">01 发挥人际连接力</div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                依托团队 25 年沉淀的无可比拟的业务人际网络，直接打通与一线分公司（如物流）的信任桥梁，这是我们独有的护城河。
+              </p>
+            </div>
+            <div className="p-6 bg-white/5 rounded-2xl border border-white/10 space-y-3 hover:bg-white/10 transition-all">
+              <div className="text-blue-400 font-bold text-lg">02 下沉最小价值单元</div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                拒绝闭门造车！深入业务源头场景，与一线业务员同吃同住同劳动，挖掘连他们自己都没意识到的真实痛点。
+              </p>
+            </div>
+            <div className="p-6 bg-white/5 rounded-2xl border border-white/10 space-y-3 hover:bg-white/10 transition-all">
+              <div className="text-blue-400 font-bold text-lg">03 打造“一击必杀”标杆</div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                集中优势兵力，在 1-2 个核心分公司打出直接可见的业绩增长（降本/增效/提润），用真金白银的战绩为数据正名。
               </p>
             </div>
           </div>
-          <div className="pt-4 border-t border-slate-50 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-            重点：建立因果联想
-          </div>
-        </div>
 
-        <div className="p-8 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-6 relative group hover:border-blue-200 transition-all">
-          <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">3</div>
-          <h3 className="font-bold text-xl">引擎上线</h3>
-          <div className="space-y-4">
-            <p className="text-sm text-slate-500 leading-relaxed">
-              前端产品接入 AI 分析能力，实现“一键深度穿透”，直接输出深刻的分析结论。
-            </p>
-            <div className="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500 text-xs">
-              <div className="font-bold text-blue-800 mb-2 flex items-center gap-1">
-                <CheckCircle size={14} /> 案例举措：上线《智能诊断助手》
-              </div>
-              <p className="text-slate-600 leading-relaxed">
-                在看板中点击任意异常指标，AI 自动调取底层明细并结合语义库生成“诊断报告”。例如：不再是给业务一张明细表，而是直接告诉他“本月收入下滑是因为 A 客户切换了结算口径，建议调整核算基准”。
+          {/* AI Empowerment Chart */}
+          <div className="relative z-10 p-8 bg-white/5 rounded-3xl border border-white/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4">
+              <h4 className="text-xl font-bold text-white">地区 AI 与技术能力赋能</h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                地区对技术的认知仍停留在“工业时代”，对遥遥领先的 AI 知之甚少。我们需要将地区的整体技术与 AI 能力从 30 分拉升至 60 分及格线。
               </p>
+              <div className="space-y-2 pt-2">
+                <div className="flex items-center gap-2 text-xs text-slate-300"><CheckCircle size={14} className="text-emerald-400"/> AI 工具使用教学（Prompt 编写、数据对话）</div>
+                <div className="flex items-center gap-2 text-xs text-slate-300"><CheckCircle size={14} className="text-emerald-400"/> 基础数据开发赋能（自助取数、低代码）</div>
+                <div className="flex items-center gap-2 text-xs text-slate-300"><CheckCircle size={14} className="text-emerald-400"/> 业务分析思维培养（从看报表到找根因）</div>
+              </div>
+            </div>
+            <div className="p-6 bg-slate-950/50 rounded-2xl space-y-6">
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs font-bold text-slate-400">
+                  <span>当前：工业时代 (30分)</span>
+                  <span>目标：智能时代 (60分)</span>
+                </div>
+                <div className="relative h-4 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="absolute top-0 left-0 h-full bg-slate-600 w-[30%]" />
+                  <motion.div 
+                    initial={{ width: '30%' }}
+                    whileInView={{ width: '60%' }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-600 to-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.5)]" 
+                  />
+                  <div className="absolute top-0 left-[30%] h-full w-0.5 bg-slate-900 z-10" />
+                  <div className="absolute top-0 left-[60%] h-full w-0.5 bg-white/50 z-10" />
+                </div>
+              </div>
+              <div className="flex justify-between text-[10px] text-slate-500">
+                <div className="w-1/3 text-left leading-tight">依赖手工 Excel<br/>被动接收报表</div>
+                <div className="w-1/3 text-center text-blue-400 font-bold">科技赋能跃迁</div>
+                <div className="w-1/3 text-right text-emerald-400 leading-tight">掌握 AI 工具<br/>自助探索分析</div>
+              </div>
             </div>
           </div>
-          <div className="pt-4 border-t border-slate-50 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-            重点：决策增强闭环
+
+          {/* Brainstorming */}
+          <div className="relative z-10 p-6 bg-red-500/10 border border-red-500/20 rounded-3xl space-y-4">
+            <h4 className="text-lg font-bold text-red-400 flex items-center gap-2">
+              <HelpCircle size={20} />
+              灵魂拷问 (Brainstorming)
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-5 bg-red-500/10 rounded-2xl text-sm text-red-200 leading-relaxed italic border border-red-500/10">
+                “如果我们下周就要派一支 3 人突击队去物流分公司驻点，谁敢带队？我们要解决的第一个能直接影响他们利润的问题是什么？”
+              </div>
+              <div className="p-5 bg-red-500/10 rounded-2xl text-sm text-red-200 leading-relaxed italic border border-red-500/10">
+                “一线业务员最讨厌我们现在提供的什么数据产品？为什么他们宁愿私下用 Excel 也不用我们花大力气做的系统？”
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="p-12 bg-slate-900 rounded-[40px] text-white text-center space-y-8">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <h3 className="text-3xl font-bold">“数据分析的本质是数据科学，<br />而数据科学的基石是语义理解。”</h3>
-          <p className="text-slate-400">让我们一起，结合数据+AI 变成一个真正懂业务的“智能大脑”。</p>
-        </div>
-        <button className="px-12 py-5 bg-blue-600 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center gap-3 mx-auto">
-          <Play size={24} />
-          立即启动数据专项
-        </button>
       </div>
     </div>
   );
