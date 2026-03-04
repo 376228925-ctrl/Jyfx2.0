@@ -31,13 +31,16 @@ import {
   Cpu,
   Eye,
   EyeOff,
-  Target
+  Target,
+  Layers,
+  ArrowUpRight,
+  Workflow
 } from 'lucide-react';
 
 const SECTIONS = [
   { id: 'problem', title: '01 痛点：科技要破局' },
   { id: 'logic', title: '02 逻辑：认知带宽 vs 维度全集' },
-  { id: 'solution', title: '03 方案：数据人员的价值跃迁' },
+  { id: 'solution', title: '03 方案：放大数据中台价值杠杆' },
   { id: 'case', title: '04 案例：从“描述数据”到“解释经营”' },
   { id: 'simulator', title: '05 仿真：人工 vs AI 分析模拟器' },
   { id: 'opportunity', title: '06 机会：我们的破局点' }
@@ -134,19 +137,19 @@ function ProblemSection() {
             </h3>
             <div className="space-y-4 text-sm text-slate-600">
               <div className="p-4 bg-slate-50 rounded-xl border-l-4 border-slate-300">
-                <div className="font-bold text-slate-800 mb-1">周一：业务提需</div>
+                <div className="font-bold text-slate-800 mb-1">周一：需求方提需</div>
                 <p>“我想看华东区收入下降的原因，帮我拉一下区域、产品、客户维度的报表。”</p>
               </div>
               <div className="p-4 bg-slate-50 rounded-xl border-l-4 border-slate-300">
                 <div className="font-bold text-slate-800 mb-1">周三：科技交付</div>
-                <p>开发完成，业务看完说：“这几个维度没发现问题，是不是线路或者天气原因？再加几个维度。”</p>
+                <p>开发完成，需求方看完说：“这几个维度没发现问题，是不是线路或者天气原因？再加几个维度。”</p>
               </div>
               <div className="p-4 bg-red-50 rounded-xl border-l-4 border-red-400">
                 <div className="font-bold text-red-800 mb-1">周五：再次交付</div>
-                <p>业务又说：“战略调整了，现在我们要看 KA 客户的利润贡献，之前的报表没用了。”</p>
+                <p>需求方又说：“战略调整了，现在我们要看 KA 客户的利润贡献，之前的报表没用了。”</p>
               </div>
             </div>
-            <p className="text-xs text-slate-400 italic">结果：科技资源在“猜谜”和“补丁”中消耗殆尽，业务依然觉得数据“不解渴”。</p>
+            <p className="text-xs text-slate-400 italic">结果：科技资源在“猜谜”和“补丁”中消耗殆尽，需求方依然觉得数据“不解渴”。</p>
           </div>
         </div>
 
@@ -161,21 +164,21 @@ function ProblemSection() {
                 <div className="shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold">1</div>
                 <div>
                   <div className="font-bold mb-1">分工太细，认知断层</div>
-                  <p className="text-sm text-blue-100">每个业务方只看自己负责的“一亩三分地”，提出的需求本身就是片面的。</p>
+                  <p className="text-sm text-blue-100">每个需求方只看自己负责的“一亩三分地”，提出的需求本身就是片面的。</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <div className="shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold">2</div>
                 <div>
                   <div className="font-bold mb-1">探索性需求 vs 确定性开发</div>
-                  <p className="text-sm text-blue-100">业务在“试错”，而科技在“盖楼”。用沉重的开发资源去应对轻灵的探索需求，必然导致浪费。</p>
+                  <p className="text-sm text-blue-100">需求方在“试错”，而科技在“盖楼”。用沉重的开发资源去应对轻灵的探索需求，必然导致浪费。</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <div className="shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold">3</div>
                 <div>
                   <div className="font-bold mb-1">单一场景的“幸存者偏差”</div>
-                  <p className="text-sm text-blue-100">业务方只想要他“认为”有问题的维度，却忽略了 90% 没被看到的可能性。</p>
+                  <p className="text-sm text-blue-100">需求方只想要他“认为”有问题的维度，却忽略了 90% 没被看到的可能性。</p>
                 </div>
               </div>
             </div>
@@ -267,176 +270,179 @@ function LogicSection() {
 }
 
 function SolutionSection() {
-  const [activeStep, setActiveStep] = useState(1);
-
   return (
     <div className="space-y-12">
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold uppercase tracking-wider">
-          <Settings size={14} />
-          Value Transition
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider">
+          <Database size={14} />
+          Middle Platform Empowerment
         </div>
         <h2 className="text-4xl font-bold text-slate-900">
           解决方案：<br />
-          <span className="text-blue-600">数据人员的价值跃迁</span>
+          <span className="text-blue-600">放大数据中台价值杠杆</span>
         </h2>
+        <p className="text-slate-500 max-w-2xl leading-relaxed">
+          我们的数据中台已具备极高的成熟度——全域数据已然打通，BI 与 AI 工具链也已就绪。现在的核心战略不再是“建烟囱”，而是<strong>释放中台基建红利，将强大的数据能力直接赋能给听得见炮火的一线</strong>。
+        </p>
       </div>
 
-      {/* Interactive Pipeline Simulator */}
-      <div className="bg-white rounded-[32px] border border-slate-200 shadow-xl overflow-hidden">
-        {/* Steps Header */}
-        <div className="flex border-b border-slate-100 bg-slate-50/50">
-          {[
-            { id: 1, title: '1. 语义注入 (灌入知识)', icon: Database },
-            { id: 2, title: '2. 全量扫描 (AI 计算)', icon: Search },
-            { id: 3, title: '3. 结论提炼 (实现效果)', icon: FileText }
-          ].map(step => (
-            <button
-              key={step.id}
-              onClick={() => setActiveStep(step.id)}
-              className={`flex-1 py-5 font-bold text-sm transition-all flex items-center justify-center gap-2 ${
-                activeStep === step.id 
-                  ? 'bg-white text-blue-600 border-b-2 border-blue-600 shadow-sm' 
-                  : 'text-slate-400 hover:text-slate-600'
-              }`}
-            >
-              <step.icon size={18} />
-              {step.title}
-            </button>
-          ))}
+      {/* Maturity Indicators */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="p-6 bg-slate-900 rounded-3xl border border-slate-800 flex items-center gap-6 relative overflow-hidden">
+          <div className="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl" />
+          <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/30 rounded-2xl flex items-center justify-center text-blue-400 shrink-0">
+            <Database size={32} />
+          </div>
+          <div>
+            <div className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-1">基建就绪 01</div>
+            <h3 className="text-lg font-bold text-white mb-2">数据全面性 (OneData)</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              核心业务数据（财务、运单、CRM、人资）已实现 100% 融通，告别数据孤岛，底层指标字典统一规范。
+            </p>
+          </div>
         </div>
+        <div className="p-6 bg-slate-900 rounded-3xl border border-slate-800 flex items-center gap-6 relative overflow-hidden">
+          <div className="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl" />
+          <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center text-emerald-400 shrink-0">
+            <Cpu size={32} />
+          </div>
+          <div>
+            <div className="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-1">基建就绪 02</div>
+            <h3 className="text-lg font-bold text-white mb-2">工具链成熟度 (Toolchain)</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              从拖拽式自助 BI 到基于大模型的智能数据问答（Data Chat），赋能一线的工具武器库已装配完毕。
+            </p>
+          </div>
+        </div>
+      </div>
 
-        {/* Step Content */}
-        <div className="p-8 md:p-12 min-h-[420px]">
-          <AnimatePresence mode="wait">
-            {activeStep === 1 && (
-              <motion.div key="step1" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold">我们向 AI 灌入什么？<span className="text-slate-400 font-normal text-base ml-2">从“写代码”到“写业务逻辑”</span></h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2"><XCircle size={14}/> 过去：只建物理表 (Raw Schema)</div>
-                    <div className="p-6 bg-slate-900 rounded-2xl font-mono text-xs text-slate-300 space-y-2 shadow-inner h-full">
-                      <div className="text-blue-400">CREATE TABLE t_income (</div>
-                      <div className="pl-4">order_id VARCHAR(32),</div>
-                      <div className="pl-4">region_id INT,</div>
-                      <div className="pl-4">amount DECIMAL(10,2),</div>
-                      <div className="pl-4">cust_type INT</div>
-                      <div className="text-blue-400">);</div>
-                      <div className="mt-6 pt-4 border-t border-slate-700 text-slate-500 italic">
-                        -- 机器只知道字段类型 (INT, VARCHAR)<br/>
-                        -- 完全不懂背后的业务含义
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="text-xs font-bold text-blue-600 uppercase tracking-widest flex items-center gap-2"><CheckCircle size={14}/> 现在：注入业务语义 (Semantic Layer)</div>
-                    <div className="p-6 bg-blue-50 rounded-2xl font-mono text-xs text-blue-800 space-y-2 border border-blue-200 shadow-sm h-full">
-                      <div className="font-bold text-blue-600">字段：amount (结算金额)</div>
-                      <div className="pl-4">业务口径：已扣除内部结算，代表真实外部收入。</div>
-                      <div className="pl-4">适用场景：毛利核算、外部财报。</div>
-                      <div className="pl-4">前置关联因子：[油价波动], [装卸费率]</div>
-                      <div className="mt-4 font-bold text-blue-600">字段：cust_type (客户分层)</div>
-                      <div className="pl-4">业务逻辑：1-KA客户(高粘性/低毛利)，2-散客(低粘性/高毛利)</div>
-                      <div className="mt-6 pt-4 border-t border-blue-200 text-emerald-600 font-bold flex items-center gap-1">
-                        <Zap size={14}/> AI 获得了业务专家的思考背景
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {activeStep === 2 && (
-              <motion.div key="step2" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold">AI 如何处理这些知识？<span className="text-slate-400 font-normal text-base ml-2">基于语义的自动全量扫描</span></h3>
-                </div>
-                <div className="relative p-8 bg-slate-900 rounded-3xl overflow-hidden flex items-center justify-center min-h-[280px]">
-                  {/* Radar/Scan animation background */}
-                  <div className="absolute inset-0 opacity-20">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-blue-500 rounded-full animate-[ping_3s_linear_infinite]" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border border-blue-400 rounded-full animate-[ping_2s_linear_infinite]" />
-                  </div>
-                  
-                  <div className="relative z-10 grid grid-cols-3 gap-6 w-full max-w-3xl">
-                    <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-center space-y-3">
-                      <Database className="mx-auto text-blue-400" size={32} />
-                      <div className="text-sm text-white font-bold">语义知识库</div>
-                      <div className="text-xs text-blue-200">业务口径 / 关联因子</div>
-                    </div>
-                    <div className="flex items-center justify-center">
-                      <div className="flex space-x-2">
-                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                      </div>
-                    </div>
-                    <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-center space-y-3">
-                      <Search className="mx-auto text-emerald-400" size={32} />
-                      <div className="text-sm text-white font-bold">400+ 维度全量扫描</div>
-                      <div className="text-xs text-emerald-200">寻找隐性强相关因子</div>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-sm text-slate-600 text-center max-w-2xl mx-auto leading-relaxed">
-                  AI 不再像人一样只查“区域”和“产品”，而是自动将“结算金额”与“油价”、“客户分层”、“天气”等数百个维度进行交叉验证，找出真正影响指标的根因。
-                </p>
-              </motion.div>
-            )}
-
-            {activeStep === 3 && (
-              <motion.div key="step3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold">最终实现什么效果？<span className="text-slate-400 font-normal text-base ml-2">直接输出业务决策建议</span></h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2"><XCircle size={14}/> 过去：扔给业务一堆表</div>
-                    <div className="p-8 bg-slate-50 rounded-2xl border border-slate-200 h-56 flex flex-col justify-center items-center text-center space-y-4">
-                      <LayoutDashboard className="text-slate-300" size={40} />
-                      <div className="text-sm text-slate-500 leading-relaxed">
-                        “你要的华东区明细表跑出来了，<br/>一共 50 万行，你自己透视一下看看原因。”
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="text-xs font-bold text-emerald-600 uppercase tracking-widest flex items-center gap-2"><CheckCircle size={14}/> 现在：直接输出经营诊断</div>
-                    <div className="p-8 bg-emerald-50 rounded-2xl border border-emerald-200 h-56 flex flex-col justify-center space-y-4 shadow-sm relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full -mr-10 -mt-10 blur-xl" />
-                      <div className="text-sm text-emerald-800 font-medium leading-relaxed relative z-10">
-                        “诊断结论：本月华东区收入下降 15%，并非销售不力。核心原因是 <strong>A 行业 KA 客户结算周期延长</strong>（非经营性），以及 <strong>油价上涨导致的毛利侵蚀</strong>。
-                        <br/><br/>
-                        💡 <strong>建议动作：</strong>调整本月核算基准，并启动燃油附加费动态更新机制。”
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+      {/* Before vs After Case Study */}
+      <div className="bg-white rounded-[32px] border border-slate-200 shadow-xl overflow-hidden">
+        <div className="p-8 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
+          <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+            <Target className="text-blue-600" size={24} />
+            一线赋能案例：某大区“客户毛利异常”排查
+          </h3>
+          <div className="text-xs font-bold text-slate-400 bg-white px-3 py-1 rounded-full border border-slate-200">
+            效率对比实录
+          </div>
         </div>
         
-        {/* Navigation Footer */}
-        <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
-          <button 
-            onClick={() => setActiveStep(prev => Math.max(1, prev - 1))}
-            className={`text-sm font-bold px-4 py-2 rounded-lg transition-all ${activeStep === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-200'}`}
-          >
-            上一步
-          </button>
-          <div className="flex gap-2">
-            {[1, 2, 3].map(step => (
-              <div key={step} className={`w-2 h-2 rounded-full transition-all ${activeStep === step ? 'bg-blue-600 w-6' : 'bg-slate-300'}`} />
-            ))}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Before */}
+          <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-slate-100 space-y-8 relative bg-slate-50/50">
+            <div className="text-sm font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+              <XCircle size={16} /> 过去：无中台时代 (人肉取数)
+            </div>
+            
+            <div className="space-y-6 relative before:absolute before:inset-y-0 before:left-4 before:w-0.5 before:bg-slate-200">
+              <div className="relative pl-10">
+                <div className="absolute left-2.5 top-1 w-3 h-3 bg-slate-300 rounded-full border-2 border-slate-50" />
+                <div className="font-bold text-sm text-slate-700">1. 需求方提单排期</div>
+                <p className="text-xs text-slate-500 mt-1">提工单申请数据，排队等待 IT 资源分配。</p>
+              </div>
+              <div className="relative pl-10">
+                <div className="absolute left-2.5 top-1 w-3 h-3 bg-slate-300 rounded-full border-2 border-slate-50" />
+                <div className="font-bold text-sm text-slate-700">2. 跨系统手工找表</div>
+                <p className="text-xs text-slate-500 mt-1">数据人员分别去 CRM、财务、运单系统写 SQL 关联数据。</p>
+              </div>
+              <div className="relative pl-10">
+                <div className="absolute left-2.5 top-1 w-3 h-3 bg-slate-300 rounded-full border-2 border-slate-50" />
+                <div className="font-bold text-sm text-slate-700">3. 离线跑批对账</div>
+                <p className="text-xs text-slate-500 mt-1">T+1 跑批，人工核对口径，发现数据对不上再重跑。</p>
+              </div>
+              <div className="relative pl-10">
+                <div className="absolute left-2.5 top-1 w-3 h-3 bg-slate-300 rounded-full border-2 border-slate-50" />
+                <div className="font-bold text-sm text-slate-700">4. 交付静态 Excel</div>
+                <p className="text-xs text-slate-500 mt-1">交付死数据，需求方想下钻看明细？对不起，重新提单。</p>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-slate-200 grid grid-cols-2 gap-4">
+              <div className="p-4 bg-white rounded-xl border border-slate-200 text-center">
+                <div className="text-2xl font-bold text-slate-700">3-5 天</div>
+                <div className="text-[10px] text-slate-400 uppercase font-bold mt-1">交付周期</div>
+              </div>
+              <div className="p-4 bg-white rounded-xl border border-slate-200 text-center">
+                <div className="text-2xl font-bold text-red-500">0%</div>
+                <div className="text-[10px] text-slate-400 uppercase font-bold mt-1">业务自主率</div>
+              </div>
+            </div>
           </div>
-          <button 
-            onClick={() => setActiveStep(prev => Math.min(3, prev + 1))}
-            className={`text-sm font-bold px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${activeStep === 3 ? 'text-slate-300 cursor-not-allowed' : 'text-blue-600 hover:bg-blue-100'}`}
-          >
-            下一步 <ArrowRight size={16} />
-          </button>
+
+          {/* After */}
+          <div className="p-8 md:p-12 space-y-8 relative bg-blue-50/30">
+            <div className="text-sm font-bold text-blue-600 uppercase tracking-widest flex items-center gap-2">
+              <CheckCircle size={16} /> 现在：中台赋能时代 (自助分析)
+            </div>
+            
+            <div className="space-y-6 relative before:absolute before:inset-y-0 before:left-4 before:w-0.5 before:bg-blue-200">
+              <div className="relative pl-10">
+                <div className="absolute left-2.5 top-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-blue-50 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                <div className="font-bold text-sm text-blue-900">1. 业务自助接入</div>
+                <p className="text-xs text-blue-700/70 mt-1">一线人员直接打开自助 BI 或 AI 数据助手。</p>
+              </div>
+              <div className="relative pl-10">
+                <div className="absolute left-2.5 top-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-blue-50 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                <div className="font-bold text-sm text-blue-900">2. 调用中台统一模型</div>
+                <p className="text-xs text-blue-700/70 mt-1">底层 OneData 模型已就绪，指标口径唯一，开箱即用。</p>
+              </div>
+              <div className="relative pl-10">
+                <div className="absolute left-2.5 top-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-blue-50 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                <div className="font-bold text-sm text-blue-900">3. 实时多维钻取</div>
+                <p className="text-xs text-blue-700/70 mt-1">秒级响应，任意拖拽“区域、产品、客户”维度进行交叉分析。</p>
+              </div>
+              <div className="relative pl-10">
+                <div className="absolute left-2.5 top-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-blue-50 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                <div className="font-bold text-sm text-blue-900">4. 洞察直达决策</div>
+                <p className="text-xs text-blue-700/70 mt-1">直接定位到某几个 KA 客户的运价折扣异常，当天下达调整指令。</p>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-blue-100 grid grid-cols-2 gap-4">
+              <div className="p-4 bg-white rounded-xl border border-blue-100 text-center shadow-sm">
+                <div className="text-2xl font-bold text-blue-600">5 分钟</div>
+                <div className="text-[10px] text-blue-400 uppercase font-bold mt-1">交付周期</div>
+              </div>
+              <div className="p-4 bg-white rounded-xl border border-blue-100 text-center shadow-sm">
+                <div className="text-2xl font-bold text-emerald-500">80%+</div>
+                <div className="text-[10px] text-emerald-600/70 uppercase font-bold mt-1">业务自主率</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Value Transition Banner */}
+      <div className="p-8 md:p-10 bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="space-y-2 text-center md:text-left">
+            <h3 className="text-2xl font-bold">数据人员的价值跃迁</h3>
+            <p className="text-sm text-slate-400">中台包揽了脏活累活，我们的战场在哪里？</p>
+          </div>
+          
+          <div className="flex items-center gap-4 md:gap-8 w-full md:w-auto">
+            <div className="flex-1 md:flex-none p-5 bg-white/5 rounded-2xl border border-white/10 text-center space-y-2">
+              <div className="w-10 h-10 mx-auto bg-slate-800 rounded-full flex items-center justify-center text-slate-400">
+                <Database size={18} />
+              </div>
+              <div className="text-sm font-bold text-slate-300">取数工具人</div>
+              <div className="text-[10px] text-slate-500">关注“怎么把数据跑出来”</div>
+            </div>
+            
+            <div className="text-blue-400 animate-pulse shrink-0">
+              <ArrowRight size={32} />
+            </div>
+            
+            <div className="flex-1 md:flex-none p-5 bg-blue-600/20 rounded-2xl border border-blue-500/30 text-center space-y-2 shadow-[0_0_30px_rgba(37,99,235,0.2)]">
+              <div className="w-10 h-10 mx-auto bg-blue-500 rounded-full flex items-center justify-center text-white shadow-lg">
+                <Brain size={18} />
+              </div>
+              <div className="text-sm font-bold text-blue-300">业务架构师 / 赋能者</div>
+              <div className="text-[10px] text-blue-200/70">关注“怎么用数据打赢仗”</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -465,7 +471,7 @@ function CaseSection() {
             </div>
             <div>
               <h3 className="text-xl font-bold">场景：某月收入意外下滑 300 万</h3>
-              <p className="text-sm text-slate-500">业务方初步怀疑是“华南区销售不力”。</p>
+              <p className="text-sm text-slate-500">需求方初步怀疑是“华南区销售不力”。</p>
             </div>
           </div>
 
