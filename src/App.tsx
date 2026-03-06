@@ -234,12 +234,12 @@ function FinaleSection() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 w-full h-screen overflow-y-auto overflow-x-hidden py-12 sm:py-20 scrollbar-hide flex flex-col items-center justify-start sm:justify-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 w-full h-screen overflow-y-auto overflow-x-hidden py-6 sm:py-10 scrollbar-hide flex flex-col items-center justify-start sm:justify-center">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="space-y-8 sm:space-y-12 text-center w-full pb-20"
+          className="space-y-6 sm:space-y-8 text-center w-full pb-8"
         >
           {/* Title Area */}
           <div className="space-y-4">
@@ -258,7 +258,7 @@ function FinaleSection() {
           </div>
 
           {/* Main Text Content */}
-          <div className="space-y-6 sm:space-y-8 text-base sm:text-lg md:text-xl lg:text-2xl font-light text-slate-200 leading-relaxed tracking-wide">
+          <div className="space-y-4 sm:space-y-6 text-base sm:text-lg md:text-xl lg:text-2xl font-light text-slate-200 leading-relaxed tracking-wide">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -287,8 +287,8 @@ function FinaleSection() {
               className="space-y-2"
             >
               <p>我发自内心地觉得幸运——</p>
-              <p>我们不是生在一个平稳的年代，</p>
-              <p className="text-white font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">而是又一次站在了一场真正的变革之中。</p>
+              <p>我们有幸处在一个和平的国度，</p>
+              <p className="text-white font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">而又一次站在了一场真正的变革之中。</p>
             </motion.div>
 
             <motion.div 
@@ -297,8 +297,8 @@ function FinaleSection() {
               transition={{ duration: 1, delay: 4.5 }}
               className="space-y-2"
             >
-              <p>时代会制造焦虑，</p>
-              <p className="text-purple-300 drop-shadow-[0_0_10px_rgba(216,180,254,0.4)]">但效率的背后也充满着机会。</p>
+              <p>时代的快速发展也许会制造焦虑，</p>
+              <p className="text-purple-300 drop-shadow-[0_0_10px_rgba(216,180,254,0.4)]">但焦虑的背后也充满着机会。</p>
             </motion.div>
 
             <motion.div 
@@ -317,7 +317,7 @@ function FinaleSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, delay: 7.0 }}
-            className="pt-8 sm:pt-12 mt-8 sm:mt-12 border-t border-indigo-500/20"
+            className="pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-indigo-500/20"
           >
             <p className="text-xs sm:text-sm text-indigo-300/60 mb-4 uppercase tracking-[0.3em]">最后，一段话送给大家</p>
             <div className="text-xl sm:text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-white leading-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
@@ -331,7 +331,7 @@ function FinaleSection() {
             initial={{ opacity: 0, scale: 0.8, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 8.5, type: "spring", bounce: 0.4 }}
-            className="pt-16 sm:pt-24 pb-12 w-full flex justify-center"
+            className="pt-8 sm:pt-12 pb-6 w-full flex justify-center"
           >
             <div className="relative group cursor-pointer inline-block">
               {/* Glowing Aura */}
@@ -344,8 +344,8 @@ function FinaleSection() {
                 
                 <span className="relative flex items-center gap-3 sm:gap-4">
                   <Target className="text-blue-400 h-6 w-6 sm:h-8 sm:w-8 animate-pulse" />
-                  <span className="text-lg sm:text-2xl lg:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 tracking-wider">
-                    期待你的加入，一起引领这场变革～
+                  <span className="text-base sm:text-xl lg:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 tracking-wider">
+                    燎原计划期待你的加入，一起引领这场变革～
                   </span>
                   <ArrowRight className="text-purple-400 h-6 w-6 sm:h-8 sm:w-8 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
