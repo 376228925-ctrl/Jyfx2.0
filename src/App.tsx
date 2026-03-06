@@ -34,7 +34,8 @@ import {
   Target,
   Layers,
   ArrowUpRight,
-  Workflow
+  Workflow,
+  Sparkles
 } from 'lucide-react';
 
 const SECTIONS = [
@@ -43,7 +44,8 @@ const SECTIONS = [
   { id: 'solution', title: '03 方案：放大数据中台价值杠杆' },
   { id: 'case', title: '04 案例：从“描述数据”到“解释经营”' },
   { id: 'simulator', title: '05 仿真：人工 vs AI 分析模拟器' },
-  { id: 'opportunity', title: '06 机会：我们的破局点' }
+  { id: 'opportunity', title: '06 机会：我们的破局点' },
+  { id: 'finale', title: '07 燎原计划v1.0' }
 ];
 
 export default function App() {
@@ -106,10 +108,252 @@ export default function App() {
             {activeSection === 'solution' && <SolutionSection />}
             {activeSection === 'case' && <CaseSection />}
             {activeSection === 'simulator' && <SimulatorSection />}
-            {activeSection === 'opportunity' && <OpportunitySection />}
+            {activeSection === 'opportunity' && <OpportunitySection onNavigate={() => setActiveSection('finale')} />}
+            {activeSection === 'finale' && <FinaleSection />}
           </motion.div>
         </AnimatePresence>
       </main>
+    </div>
+  );
+}
+
+function FinaleSection() {
+  return (
+    <div className="fixed inset-0 z-[100] bg-[#000000] overflow-hidden flex items-center justify-center font-sans">
+      <style>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.2; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1.2); }
+        }
+        @keyframes shooting-star {
+          0% { transform: translateX(0) translateY(0) rotate(-45deg) scale(1); opacity: 1; }
+          5% { opacity: 1; }
+          100% { transform: translateX(-2000px) translateY(2000px) rotate(-45deg) scale(0.1); opacity: 0; }
+        }
+        @keyframes slow-pan {
+          0% { transform: scale(1.1) translate(0, 0); }
+          50% { transform: scale(1.1) translate(-2%, 2%); }
+          100% { transform: scale(1.1) translate(0, 0); }
+        }
+        @keyframes particle-drift {
+          0% { transform: translateY(0) translateX(0) translateZ(0); opacity: 0; }
+          10% { opacity: 0.8; }
+          90% { opacity: 0.8; }
+          100% { transform: translateY(-100vh) translateX(20vw) translateZ(0); opacity: 0; }
+        }
+        @keyframes particle-drift-reverse {
+          0% { transform: translateY(100vh) translateX(0) translateZ(0); opacity: 0; }
+          10% { opacity: 0.8; }
+          90% { opacity: 0.8; }
+          100% { transform: translateY(-20vh) translateX(-20vw) translateZ(0); opacity: 0; }
+        }
+        @keyframes shimmer {
+          100% { transform: translateX(100%); }
+        }
+        .star {
+          position: absolute;
+          background-color: white;
+          border-radius: 50%;
+        }
+        .particle {
+          position: absolute;
+          border-radius: 50%;
+          box-shadow: 0 0 10px 2px rgba(129, 140, 248, 0.6);
+          background-color: rgba(255, 255, 255, 0.8);
+        }
+      `}</style>
+
+      {/* Deep Space Background */}
+      <div className="absolute inset-0 animate-[slow-pan_60s_ease-in-out_infinite]">
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_#1b2735_0%,_#000000_100%)]"></div>
+        
+        {/* Giant Nebulas */}
+        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-fuchsia-900/20 blur-[120px] rounded-full mix-blend-screen"></div>
+        <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-blue-900/20 blur-[150px] rounded-full mix-blend-screen"></div>
+        <div className="absolute top-[30%] left-[30%] w-[40vw] h-[40vw] bg-indigo-900/20 blur-[100px] rounded-full mix-blend-screen"></div>
+
+        {/* Stars Layer 1 (Small, many) */}
+        {[...Array(150)].map((_, i) => (
+          <div key={`star1-${i}`} className="star" style={{
+            width: Math.random() * 2 + 'px',
+            height: Math.random() * 2 + 'px',
+            left: Math.random() * 100 + '%',
+            top: Math.random() * 100 + '%',
+            opacity: Math.random(),
+            animation: `twinkle ${Math.random() * 5 + 3}s infinite ${Math.random() * 5}s`
+          }}></div>
+        ))}
+
+        {/* Stars Layer 2 (Larger, glowing) */}
+        {[...Array(50)].map((_, i) => (
+          <div key={`star2-${i}`} className="star shadow-[0_0_12px_rgba(255,255,255,0.9)]" style={{
+            width: Math.random() * 3 + 1 + 'px',
+            height: Math.random() * 3 + 1 + 'px',
+            left: Math.random() * 100 + '%',
+            top: Math.random() * 100 + '%',
+            backgroundColor: Math.random() > 0.5 ? '#e0f2fe' : '#fdf4ff',
+            animation: `twinkle ${Math.random() * 4 + 2}s infinite ${Math.random() * 5}s`
+          }}></div>
+        ))}
+
+        {/* Dynamic Light Particles (Moving upwards/diagonally) */}
+        {[...Array(40)].map((_, i) => (
+          <div key={`particle1-${i}`} className="particle" style={{
+            width: Math.random() * 4 + 1 + 'px',
+            height: Math.random() * 4 + 1 + 'px',
+            left: Math.random() * 100 + '%',
+            top: Math.random() * 100 + 20 + '%',
+            animation: `particle-drift ${Math.random() * 15 + 10}s linear infinite ${Math.random() * 10}s`,
+            opacity: 0
+          }}></div>
+        ))}
+
+        {/* Dynamic Light Particles (Moving downwards/diagonally) */}
+        {[...Array(30)].map((_, i) => (
+          <div key={`particle2-${i}`} className="particle shadow-[0_0_15px_3px_rgba(192,132,252,0.6)]" style={{
+            width: Math.random() * 3 + 1 + 'px',
+            height: Math.random() * 3 + 1 + 'px',
+            left: Math.random() * 100 + '%',
+            top: Math.random() * -20 + '%',
+            animation: `particle-drift-reverse ${Math.random() * 20 + 15}s linear infinite ${Math.random() * 10}s`,
+            opacity: 0
+          }}></div>
+        ))}
+
+        {/* Enhanced Shooting Stars */}
+        {[...Array(12)].map((_, i) => (
+          <div key={`shooting-${i}`} className="absolute top-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent shadow-[0_0_10px_2px_rgba(255,255,255,0.8)]" style={{
+            width: Math.random() * 150 + 50 + 'px',
+            left: Math.random() * 150 + '%',
+            top: Math.random() * 100 - 50 + '%',
+            animation: `shooting-star ${Math.random() * 2 + 1.5}s linear infinite ${Math.random() * 10}s`,
+            opacity: 0
+          }}></div>
+        ))}
+      </div>
+
+      {/* Content Container */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 w-full h-screen overflow-y-auto overflow-x-hidden py-12 sm:py-20 scrollbar-hide flex flex-col items-center justify-start sm:justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="space-y-8 sm:space-y-12 text-center w-full pb-20"
+        >
+          {/* Title Area */}
+          <div className="space-y-4">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 2, delay: 0.5 }}
+              className="inline-flex items-center justify-center gap-3 px-8 py-3 rounded-full border border-indigo-500/30 bg-indigo-950/30 backdrop-blur-md shadow-[0_0_30px_rgba(79,70,229,0.2)]"
+            >
+              <Sparkles className="text-blue-400" size={24} />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 font-black tracking-[0.3em] uppercase text-lg">
+                燎原计划 v1.0
+              </span>
+              <Sparkles className="text-purple-400" size={24} />
+            </motion.div>
+          </div>
+
+          {/* Main Text Content */}
+          <div className="space-y-6 sm:space-y-8 text-base sm:text-lg md:text-xl lg:text-2xl font-light text-slate-200 leading-relaxed tracking-wide">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.5 }}
+              className="space-y-2"
+            >
+              <p className="text-white font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">AI 正在以前所未有的速度发展。</p>
+              <p>也许很快，生产力将不再是稀缺资源。</p>
+              <p>那个靠“多做一点”取胜的时代，正在过去。</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 2.5 }}
+              className="space-y-2"
+            >
+              <p className="text-blue-300 drop-shadow-[0_0_10px_rgba(147,197,253,0.4)]">一个全新的时代正在展开。</p>
+              <p>它会重塑行业，重塑组织，也会重塑每一个人。</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 3.5 }}
+              className="space-y-2"
+            >
+              <p>我发自内心地觉得幸运——</p>
+              <p>我们不是生在一个平稳的年代，</p>
+              <p className="text-white font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">而是又一次站在了一场真正的变革之中。</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 4.5 }}
+              className="space-y-2"
+            >
+              <p>时代会制造焦虑，</p>
+              <p className="text-purple-300 drop-shadow-[0_0_10px_rgba(216,180,254,0.4)]">但效率的背后也充满着机会。</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 5.5 }}
+              className="text-sm sm:text-base md:text-lg text-slate-400 max-w-3xl mx-auto"
+            >
+              <p>真心的希望，在这次百年大变的 AI 变革中，</p>
+              <p>在座的每个人都是这场变革的参与者，一起见证下一次奇迹；</p>
+            </motion.div>
+          </div>
+
+          {/* Footer Quote */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, delay: 7.0 }}
+            className="pt-8 sm:pt-12 mt-8 sm:mt-12 border-t border-indigo-500/20"
+          >
+            <p className="text-xs sm:text-sm text-indigo-300/60 mb-4 uppercase tracking-[0.3em]">最后，一段话送给大家</p>
+            <div className="text-xl sm:text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-white leading-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+              <p className="mb-3">保持热爱、保持乐观、保持自驱；</p>
+              <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 drop-shadow-[0_0_20px_rgba(129,140,248,0.5)]">乾坤未定，你我皆是黑马。</p>
+            </div>
+          </motion.div>
+
+          {/* CENTERED CALL TO ACTION */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 8.5, type: "spring", bounce: 0.4 }}
+            className="pt-16 sm:pt-24 pb-12 w-full flex justify-center"
+          >
+            <div className="relative group cursor-pointer inline-block">
+              {/* Glowing Aura */}
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full blur-xl opacity-70 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+              
+              {/* Button Content */}
+              <div className="relative px-6 py-4 sm:px-10 sm:py-6 bg-black/80 backdrop-blur-2xl rounded-full flex items-center justify-center border border-indigo-400/50 shadow-[inset_0_0_30px_rgba(99,102,241,0.3)] overflow-hidden">
+                {/* Inner shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                
+                <span className="relative flex items-center gap-3 sm:gap-4">
+                  <Target className="text-blue-400 h-6 w-6 sm:h-8 sm:w-8 animate-pulse" />
+                  <span className="text-lg sm:text-2xl lg:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 tracking-wider">
+                    期待你的加入，一起引领这场变革～
+                  </span>
+                  <ArrowRight className="text-purple-400 h-6 w-6 sm:h-8 sm:w-8 group-hover:translate-x-2 transition-transform duration-300" />
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 }
@@ -846,18 +1090,30 @@ function SimulatorSection() {
   );
 }
 
-function OpportunitySection() {
+function OpportunitySection({ onNavigate }: { onNavigate: () => void }) {
   return (
-    <div className="space-y-12">
-      <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider">
-          <Target size={14} />
-          Our Opportunities
+    <div className="space-y-12 relative">
+      <div className="flex justify-between items-start">
+        <div className="space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider">
+            <Target size={14} />
+            Our Opportunities
+          </div>
+          <h2 className="text-4xl font-bold text-slate-900">
+            我们的机会点：<br />
+            <span className="text-blue-600">重塑科技与业务的生产关系</span>
+          </h2>
         </div>
-        <h2 className="text-4xl font-bold text-slate-900">
-          我们的机会点：<br />
-          <span className="text-blue-600">重塑科技与业务的生产关系</span>
-        </h2>
+        
+        <button 
+          onClick={onNavigate}
+          className="group relative inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-bold overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(0,0,0,0.3)]"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <Sparkles size={18} className="relative z-10 text-blue-400 group-hover:text-white transition-colors" />
+          <span className="relative z-10">燎原计划v1.0</span>
+          <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+        </button>
       </div>
 
       <div className="space-y-8">
@@ -944,29 +1200,84 @@ function OpportunitySection() {
                 <div className="flex items-center gap-2 text-xs text-slate-300"><CheckCircle size={14} className="text-emerald-400"/> 业务分析思维培养（从看报表到找根因）</div>
               </div>
             </div>
-            <div className="p-6 bg-slate-950/50 rounded-2xl space-y-6">
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs font-bold text-slate-400">
-                  <span>当前：工业时代 (30分)</span>
-                  <span>目标：智能时代 (60分)</span>
-                </div>
-                <div className="relative h-4 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="absolute top-0 left-0 h-full bg-slate-600 w-[30%]" />
-                  <motion.div 
-                    initial={{ width: '30%' }}
-                    whileInView={{ width: '60%' }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-600 to-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.5)]" 
-                  />
-                  <div className="absolute top-0 left-[30%] h-full w-0.5 bg-slate-900 z-10" />
-                  <div className="absolute top-0 left-[60%] h-full w-0.5 bg-white/50 z-10" />
-                </div>
+            <div className="p-8 bg-slate-950/50 rounded-3xl space-y-8 relative border border-slate-800/50">
+              <div className="text-sm font-bold text-white flex items-center gap-2">
+                <Target size={16} className="text-blue-400" />
+                地区数据能力演进路线
               </div>
-              <div className="flex justify-between text-[10px] text-slate-500">
-                <div className="w-1/3 text-left leading-tight">依赖手工 Excel<br/>被动接收报表</div>
-                <div className="w-1/3 text-center text-blue-400 font-bold">科技赋能跃迁</div>
-                <div className="w-1/3 text-right text-emerald-400 leading-tight">掌握 AI 工具<br/>自助探索分析</div>
+              <div className="relative mt-8">
+                {/* Connecting Line */}
+                <div className="absolute top-7 left-[16%] right-[16%] h-1 bg-slate-800 rounded-full" />
+                <motion.div 
+                  initial={{ width: '0%' }}
+                  whileInView={{ width: '34%' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                  className="absolute top-7 left-[16%] h-1 bg-blue-500 rounded-full z-0" 
+                />
+                <motion.div 
+                  initial={{ width: '0%' }}
+                  whileInView={{ width: '34%' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 1.5, ease: "easeOut" }}
+                  className="absolute top-7 left-[50%] h-1 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full z-0" 
+                />
+
+                <div className="relative flex justify-between z-10">
+                  {/* Stage 1 */}
+                  <div className="flex flex-col items-center w-1/3 space-y-4">
+                    <div className="w-14 h-14 rounded-2xl bg-slate-800 border-4 border-slate-900 flex items-center justify-center text-slate-400 shadow-inner">
+                      <FileText size={24} />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">当前阶段</div>
+                      <div className="text-sm font-bold text-white">工业时代</div>
+                      <div className="text-xs text-slate-400 mt-2 leading-relaxed">
+                        依赖手工 Excel 拼凑<br/>被动接收静态报表
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stage 2 */}
+                  <div className="flex flex-col items-center w-1/3 space-y-4">
+                    <motion.div 
+                      initial={{ scale: 0.8, opacity: 0.5 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 1 }}
+                      className="w-14 h-14 rounded-2xl bg-blue-900 border-4 border-slate-900 flex items-center justify-center text-blue-400 shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+                    >
+                      <LayoutDashboard size={24} />
+                    </motion.div>
+                    <div className="text-center">
+                      <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1">科技赋能</div>
+                      <div className="text-sm font-bold text-white">数字化时代</div>
+                      <div className="text-xs text-blue-200/60 mt-2 leading-relaxed">
+                        掌握 BI 工具链<br/>实现自助拖拽分析
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stage 3 */}
+                  <div className="flex flex-col items-center w-1/3 space-y-4">
+                    <motion.div 
+                      initial={{ scale: 0.8, opacity: 0.5 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 2 }}
+                      className="w-14 h-14 rounded-2xl bg-emerald-900 border-4 border-slate-900 flex items-center justify-center text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+                    >
+                      <Brain size={24} />
+                    </motion.div>
+                    <div className="text-center">
+                      <div className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mb-1">终极目标</div>
+                      <div className="text-sm font-bold text-white">智能时代</div>
+                      <div className="text-xs text-emerald-200/60 mt-2 leading-relaxed">
+                        AI 决策引擎辅助<br/>智能洞察与建议
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
